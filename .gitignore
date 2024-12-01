@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/target/
+*.log
+src/main/resources/application.properties
