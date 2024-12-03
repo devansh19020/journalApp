@@ -1,5 +1,7 @@
 package net.magikarp.journalApp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,27 +15,27 @@ import net.magikarp.journalApp.entity.User;
 import net.magikarp.journalApp.service.UserService;
 
 
-@RestController
-@RequestMapping("/public")
-public class PublicController {
 
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+    
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create-user")
-    public ResponseEntity<?> createUser(@RequestBody User myUser){
-        try {
-            userService.saveNewEntry(myUser);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } 
-        catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @GetMapping("/all-users")
+    public ResponseEntity<?> getAllUsers(){
+        List<User> all = userService.getAll();
+        if(all!=null && !all.isEmpty()){
+            return new ResponseEntity(all, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/health-check")
-    public String healthcheck() {
-        return "Hello World";
+    @PostMapping("create-admin-user")
+    public ResponseEntity<?> postMethodName(@RequestBody User user) {
+        userService.saveAdmin(user);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
     
 }
