@@ -17,6 +17,7 @@ import net.magikarp.journalApp.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+//@Profile("dev") Can be used for setting profile based code
 public class SpringSecurityConfig {
 
     @Autowired
