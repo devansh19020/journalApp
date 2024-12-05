@@ -10,10 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import net.magikarp.journalApp.entity.User;
 import net.magikarp.journalApp.repository.UserRepository;
 
 @Component
+@Slf4j
 public class UserService {
     
     @Autowired
@@ -21,10 +23,20 @@ public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveNewEntry(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList("USER"));
-        userRepository.save(user);
+    public boolean saveNewEntry(User user){
+        try{
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(Arrays.asList("USER"));
+            userRepository.save(user);
+            return true;
+        } catch (Exception e){
+            log.error("Error occured for {}", user.getUserName(), e);
+            // logger.warn("hahahahaha");
+            // log.debug("hahahahaha");
+            // log.trace("hahahahaha");
+            // log.info("hahahahaha");
+            throw new RuntimeException("Already exists");
+        }
     }
 
     public void saveUser(User user){
