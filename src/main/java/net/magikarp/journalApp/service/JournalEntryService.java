@@ -6,14 +6,14 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.magikarp.journalApp.entity.JournalEntry;
 import net.magikarp.journalApp.entity.User;
 import net.magikarp.journalApp.repository.JournalEntryRepository;
 
-@Component
+@Service
 public class JournalEntryService {
 
     @Autowired
