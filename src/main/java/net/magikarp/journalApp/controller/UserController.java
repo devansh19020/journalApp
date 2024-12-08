@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.magikarp.journalApp.api_response.WeatherResponse;
+import net.magikarp.journalApp.api.response.WeatherResponse;
 import net.magikarp.journalApp.entity.User;
 import net.magikarp.journalApp.service.UserService;
 import net.magikarp.journalApp.service.WeatherService;

@@ -1,4 +1,4 @@
-package net.magikarp.journalApp.api_response;
+package net.magikarp.journalApp.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

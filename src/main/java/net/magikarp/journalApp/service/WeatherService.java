@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import net.magikarp.journalApp.api_response.WeatherResponse;
+import net.magikarp.journalApp.api.response.WeatherResponse;
+import net.magikarp.journalApp.cache.AppCache;
 
 @Service
 public class WeatherService {
@@ -19,8 +20,11 @@ public class WeatherService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    private AppCache appCache;
+
     public WeatherResponse getWeather(double latitude, double longitude) {
-        String url = String.format("https://api.api-ninjas.com/v1/weather?lat=%.4f&lon=%.4f", latitude, longitude);
+        String url = String.format(appCache.appCache.get(AppCache.keys.WEATHER_API.toString()), latitude, longitude);
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Api-Key", API_KEY);
         HttpEntity<String> entity = new HttpEntity<>(headers);
